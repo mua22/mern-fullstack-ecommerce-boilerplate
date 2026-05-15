@@ -1,11 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Product = require('../../models/Product');
+const Product = require("../../models/Product");
 
 // Get Cart
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   const cartCookie = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-  
+
   // Populate cart with actual product details
   const cartItems = [];
   let total = 0;
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
       if (product) {
         cartItems.push({
           product,
-          quantity: item.quantity
+          quantity: item.quantity,
         });
         total += product.price * item.quantity;
       }
@@ -25,41 +25,43 @@ router.get('/', async (req, res) => {
     }
   }
 
-  res.render('shop/cart', {
-    title: 'Your Cart',
+  res.render("shop/cart", {
+    title: "Your Cart",
     cartItems,
-    total
+    total,
   });
 });
 
 // Add to Cart
-router.post('/add/:id', (req, res) => {
+router.post("/add/:id", (req, res) => {
   const productId = req.params.id;
   const quantity = parseInt(req.body.quantity) || 1;
   let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
 
-  const existingItemIndex = cart.findIndex(item => item.productId === productId);
+  const existingItemIndex = cart.findIndex(
+    (item) => item.productId === productId,
+  );
   if (existingItemIndex > -1) {
     cart[existingItemIndex].quantity += quantity;
   } else {
     cart.push({ productId, quantity });
   }
 
-  res.cookie('cart', JSON.stringify(cart), { maxAge: 900000, httpOnly: true });
-  req.flash('success', 'Item added to cart');
-  res.redirect(req.get('Referrer') || '/shop');
+  res.cookie("cart", JSON.stringify(cart), { maxAge: 900000, httpOnly: true });
+  req.flash("success", "Item added to cart");
+  res.redirect(req.get("Referrer") || "/shop");
 });
 
 // Remove from Cart
-router.post('/remove/:id', (req, res) => {
+router.post("/remove/:id", (req, res) => {
   const productId = req.params.id;
   let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-  
-  cart = cart.filter(item => item.productId !== productId);
-  
-  res.cookie('cart', JSON.stringify(cart), { maxAge: 900000, httpOnly: true });
-  req.flash('success', 'Item removed from cart');
-  res.redirect('/cart');
+
+  cart = cart.filter((item) => item.productId !== productId);
+
+  res.cookie("cart", JSON.stringify(cart), { maxAge: 900000, httpOnly: true });
+  req.flash("success", "Item removed from cart");
+  res.redirect("/cart");
 });
 
 module.exports = router;
