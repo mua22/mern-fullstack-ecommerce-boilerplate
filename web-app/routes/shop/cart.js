@@ -33,9 +33,9 @@ router.get("/", async (req, res) => {
 });
 
 // Add to Cart
-router.post("/add/:id", (req, res) => {
+router.get("/add/:id", (req, res) => {
   const productId = req.params.id;
-  const quantity = parseInt(req.body.quantity) || 1;
+  const quantity = parseInt(req.query.quantity) || 1;
   let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
 
   const existingItemIndex = cart.findIndex(

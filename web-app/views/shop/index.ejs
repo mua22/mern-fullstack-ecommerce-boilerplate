@@ -18,10 +18,7 @@
             <p class="product-desc"><%= product.description %></p>
             <div class="product-bottom">
               <span class="product-price">$<%= product.price.toFixed(2) %></span>
-              <form action="/cart/add/<%= product._id %>" method="POST" style="display: inline;">
-                <input type="hidden" name="quantity" value="1">
-                <button type="submit" class="btn btn-secondary">Add to Cart</button>
-              </form>
+              <a href="/cart/add/<%= product._id %>" class="btn btn-secondary">Add to Cart</a>
             </div>
           </div>
         </div>

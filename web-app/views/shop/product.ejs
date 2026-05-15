@@ -16,7 +16,7 @@
       <p style="font-size: 1.1rem; line-height: 1.6; color: #4a5568;"><%= product.description %></p>
     </div>
     <div style="margin-top: 2rem;">
-      <form action="/cart/add/<%= product._id %>" method="POST" style="display: flex; gap: 1rem; align-items: center;">
+      <form action="/cart/add/<%= product._id %>" method="GET" style="display: flex; gap: 1rem; align-items: center;">
         <input type="number" name="quantity" value="1" min="1" style="width: 60px; padding: 0.5rem; border: 1px solid #cbd5e0; border-radius: 4px;">
         <button type="submit" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem; cursor: pointer;">Add to Cart</button>
       </form>
