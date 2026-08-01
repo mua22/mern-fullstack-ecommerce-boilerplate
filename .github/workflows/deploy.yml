@@ -5,18 +5,19 @@ on:
     branches:
       - main
 
+# Opt into Node 24 runtime execution globally for this workflow
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
-      ACTIONS_NODE20_SILENCE_WARNINGS: true
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Deploy to VPS via SSH
-        # Update ssh-action from v1.0.3 to v1.2.0 (or v1.2.1)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
