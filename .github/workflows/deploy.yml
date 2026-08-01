@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Upgrading from @v4 to @v5 (or @v6) updates the internal action target to Node 24
       - name: Checkout Repository
         uses: actions/checkout@v5
 
@@ -20,6 +19,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          debug: true  # <--- Prints exact SSH logs and failing terminal output
           script: |
             cd /var/www/apps/node-shop
             git fetch origin main
