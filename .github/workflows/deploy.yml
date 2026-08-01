@@ -8,7 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+      ACTIONS_NODE20_SILENCE_WARNINGS: true
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
