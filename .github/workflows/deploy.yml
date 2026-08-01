@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Update to tag @v4.2.2 (or pinning commit hash) which uses the updated Node runtime
       - name: Checkout Repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4
 
       - name: Deploy to VPS via SSH
+        # Update ssh-action from v1.0.3 to v1.2.0 (or v1.2.1)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
