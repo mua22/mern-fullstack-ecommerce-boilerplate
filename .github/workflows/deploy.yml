@@ -5,17 +5,14 @@ on:
     branches:
       - main
 
-# Opt into Node 24 runtime execution globally for this workflow
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Upgrading from @v4 to @v5 (or @v6) updates the internal action target to Node 24
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Deploy to VPS via SSH
         uses: appleboy/ssh-action@v1.2.0
