@@ -53,7 +53,7 @@ router.post('/', ensureAuthenticated, async (req, res) => {
 
     // Clear cart cookie
     res.clearCookie('cart');
-    
+
     req.flash('success', 'Order placed successfully!');
     res.redirect('/');
   } catch (err) {
